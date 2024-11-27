@@ -1,19 +1,31 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./header.css";
-
+import { useState } from "react";
 const Header = () => {
+  const [clicked, setClicked] = useState(false);
+
+  const handleClick = () => {
+    setClicked(!clicked);
+  };
+
   return (
     <div>
       <div className="header">
-        <h1 className="header-left">
-          <Link className="logo" to="/">
-            Movies
-          </Link>
-        </h1>
+        <div>
+          <div className="logo-left">
+            <Link className="logo" to="/">
+              Movies
+            </Link>
+            <span className="material-symbols-outlined" onClick={handleClick}>
+              menu
+            </span>
+          </div>
+        </div>
 
         <div className="header-right">
-          <nav>
+          <nav
+            className={clicked ? "navbar-mobile-open" : "navbar-mobile-close"}
+          >
             <ul className="nav-links">
               <li>
                 <Link to="/">Home</Link>
