@@ -30,6 +30,7 @@
 }
 
 .search-button {
+  flex-shrink: 1;
   padding: 15px 30px;
   border: none;
   background-color: #446284;
@@ -48,10 +49,10 @@
     width: 90%;
   }
   .search-bar {
-    flex: 1;
     padding: 10px 15px;
   }
   .search-button {
+    flex-shrink: 1;
     padding: 15px 15px;
     font-size: 0.8rem;
     flex: 0.6;

@@ -17,7 +17,13 @@ const Login = () => {
             style={{ padding: "10px", width: "300px", margin: "10px 0" }}
           />
         </div>
-        <button style={{ padding: "10px 20px", cursor: "pointer" }}>
+        <button
+          style={{
+            padding: "10px 20px",
+            cursor: "pointer",
+            backgroundcolor: "#446284;",
+          }}
+        >
           Login
         </button>
       </form>

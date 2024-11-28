@@ -7,6 +7,7 @@ import FavoritesPage from "./pages/FavoritesPage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Header from "./components/Header";
+
 const App = () => {
   return (
     <Router>
