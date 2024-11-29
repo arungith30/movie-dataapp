@@ -44,6 +44,43 @@
   background-color: #4f6886;
 }
 
+.error {
+  color: red;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.movies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.movie {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 1rem;
+  width: 200px;
+  text-align: center;
+}
+
+.movie img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.movie h3 {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.movie p {
+  color: #555;
+  font-size: 0.9rem;
+}
 @media (max-width: 660px) {
   .search-container {
     width: 90%;

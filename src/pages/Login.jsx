@@ -21,7 +21,7 @@ const Login = () => {
           style={{
             padding: "10px 20px",
             cursor: "pointer",
-            backgroundcolor: "#446284;",
+            backgroundcolor: "#446284",
           }}
         >
           Login
