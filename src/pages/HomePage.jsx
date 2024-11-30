@@ -7,14 +7,11 @@ const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
 
   const handleSearch = () => {
     const fetchMovies = async (searchInput) => {
-      setLoading(true);
       if (!searchInput.trim()) {
         setError("Please enter a movie name!");
-        setLoading(false);
       }
       setError("");
 
@@ -44,8 +41,6 @@ const HomePage = () => {
         }
 
         console.log(error);
-      } finally {
-        setLoading(false);
       }
     };
 
