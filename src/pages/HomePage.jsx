@@ -1,24 +1,27 @@
 import "./homepage.css";
-import { useState } from "react";
+import { useState, React } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import React from "react";
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+  const [Loading, setLoading] = useState(false);
 
   const handleSearch = () => {
+    setLoading(true);
     const fetchMovies = async (searchInput) => {
       if (!searchInput.trim()) {
         setError("Please enter a movie name!");
-        return;
       }
       setError("");
 
       try {
         const response = await axios.get(
-          `http://www.omdbapi.com/?apikey=${"9c66f674"}&s=${searchInput}&page=${1}`
+          `http://www.omdbapi.com/?apikey=${
+            process.env.REACT_APP_OMDB_API_KEY
+          }&s=${searchInput}&page=${1}`
         );
 
         if (response.data.Response === "True") {
@@ -31,8 +34,17 @@ const HomePage = () => {
         }
         console.log(response.data.Search);
       } catch (error) {
-        setError("Movie not found. Please try again .");
+        if (error.response) {
+          setError("API error: " + error.response.data.Error);
+        } else if (error.request) {
+          setError("Network error. Please check your connection.");
+        } else {
+          setError("An unknown error occurred.");
+        }
+
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -58,15 +70,17 @@ const HomePage = () => {
         <div className="movies">
           {movies.map((movie) => (
             <div key={movie.imdbID} className="movie">
-              <img
-                src={
-                  movie.Poster !== "N/A"
-                    ? movie.Poster
-                    : "https://via.placeholder.com/150"
-                }
-                alt={`${movie.Title} poster`}
-              />
-              <h3>{movie.Title}</h3>
+              <Link to={`/movies/${movie.imdbID}`}>
+                <img
+                  src={
+                    movie.Poster !== "N/A"
+                      ? movie.Poster
+                      : "https://via.placeholder.com/150"
+                  }
+                  alt={`${movie.Title} poster`}
+                />{" "}
+                <h3>{movie.Title}</h3>
+              </Link>
               <p>{movie.Year}</p>
             </div>
           ))}
