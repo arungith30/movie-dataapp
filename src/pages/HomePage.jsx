@@ -34,8 +34,6 @@ const HomePage = () => {
       } catch (error) {
         if (error.response) {
           setError("API error: " + error.response.data.Error);
-        } else if (error.request) {
-          setError("Network error. Please check your connection.");
         } else {
           setError("An unknown error occurred.");
         }
