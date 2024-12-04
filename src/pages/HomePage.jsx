@@ -7,6 +7,11 @@ const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState("");
+  function handleKeyPress(event) {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  }
 
   const handleSearch = () => {
     const fetchMovies = async (searchInput) => {
@@ -54,6 +59,7 @@ const HomePage = () => {
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="type here to search"
           type="text"
+          onKeyPress={handleKeyPress}
         />
         <button className="search-button " onClick={handleSearch}>
           Search
