@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./moviedetails.css";
+import { FavoritesContext } from "../context/FavoritesContext";
 
 const MovieDetailsPage = () => {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { favorites, dispatch } = useContext(FavoritesContext);
 
   const fetchMovieDetails = async (id) => {
     try {
@@ -32,11 +34,12 @@ const MovieDetailsPage = () => {
   if (error) return <p>{error}</p>;
 
   const handleAddToFavorites = () => {
-    const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
+    // const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (favorites.find((fav) => fav.imdbID === movie.imdbID)) {
       alert(`${movie.Title} is already in favorites.`);
     } else {
-      localStorage.setItem("favorites", JSON.stringify([...favorites, movie]));
+      //  localStorage.setItem("favorites", JSON.stringify([...favorites, movie]));
+      dispatch({ type: "ADD_FAVORITE", payload: movie });
       alert(`${movie.Title} has been added to favorites.`);
     }
   };
