@@ -33,12 +33,14 @@ const MovieDetailsPage = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>{error}</p>;
 
-  const handleAddToFavorites = () => {
+  const handleAddRemoveFavorites = () => {
     // const favorites = JSON.parse(localStorage.getItem("favorites")) || [];
     if (favorites.find((fav) => fav.imdbID === movie.imdbID)) {
-      alert(`${movie.Title} is already in favorites.`);
+      dispatch({ type: "REMOVE_FAVORITE", payload: movie });
+      alert(`${movie.Title} is removed from favorites.`);
     } else {
       //  localStorage.setItem("favorites", JSON.stringify([...favorites, movie]));
+      //insted of setting local storage here we use context api to set global state.
       dispatch({ type: "ADD_FAVORITE", payload: movie });
       alert(`${movie.Title} has been added to favorites.`);
     }
@@ -70,7 +72,11 @@ const MovieDetailsPage = () => {
       <p>
         <strong>Director:</strong> {movie.Director}
       </p>
-      <button onClick={handleAddToFavorites}>Add to Favorites</button>
+      <button onClick={handleAddRemoveFavorites}>
+        {favorites.imdbID === movie.imdbID
+          ? "Remove from Favorites"
+          : "Add to Favorites"}
+      </button>
     </div>
   );
 };
