@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import "./header.css";
 import { useState } from "react";
 const Header = () => {
@@ -13,9 +13,9 @@ const Header = () => {
       <div className="header">
         <div>
           <div className="logo-left">
-            <Link className="logo" to="/">
+            <NavLink className="logo" to="/">
               Movies
-            </Link>
+            </NavLink>
             <span className="material-symbols-outlined" onClick={handleClick}>
               menu
             </span>
@@ -28,16 +28,44 @@ const Header = () => {
           >
             <ul className="nav-links">
               <li>
-                <Link to="/">Home</Link>
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "nonactive-link"
+                  }
+                >
+                  Home
+                </NavLink>
               </li>
               <li>
-                <Link to="/favorites">Favorites</Link>
+                <NavLink
+                  to="/favorites"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "nonactive-link"
+                  }
+                >
+                  Favorites
+                </NavLink>
               </li>
               <li>
-                <Link to="/login">Login</Link>
+                <NavLink
+                  to="/login"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "nonactive-link"
+                  }
+                >
+                  Login
+                </NavLink>
               </li>
               <li>
-                <Link to="/register">Register</Link>
+                <NavLink
+                  to="/register"
+                  className={({ isActive }) =>
+                    isActive ? "active-link" : "nonactive-link"
+                  }
+                >
+                  Register
+                </NavLink>
               </li>
             </ul>
           </nav>

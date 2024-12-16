@@ -1,7 +1,7 @@
 import "./homepage.css";
 import { useState, React } from "react";
-import { Link } from "react-router-dom";
 import axios from "axios";
+import MovieCard from "../components/MovieCard";
 
 const HomePage = () => {
   const [searchInput, setSearchInput] = useState("");
@@ -69,20 +69,7 @@ const HomePage = () => {
       <div>
         <div className="movies">
           {movies.map((movie) => (
-            <div key={movie.imdbID} className="movie">
-              <Link to={`/movies/${movie.imdbID}`}>
-                <img
-                  src={
-                    movie.Poster !== "N/A"
-                      ? movie.Poster
-                      : "https://via.placeholder.com/150"
-                  }
-                  alt={`${movie.Title} poster`}
-                />{" "}
-                <h3>{movie.Title}</h3>
-              </Link>
-              <p>{movie.Year}</p>
-            </div>
+            <MovieCard {...movie} key={movie.imdbID} />
           ))}
         </div>
       </div>

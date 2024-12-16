@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../components/firebase";
-
+import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful!");
+
+      // Redirect to the favorites or another route after successful login
+      navigate("/favorites");
     } catch (error) {
       setError(error.message);
+      alert("Login failed! Please try again.");
     }
   };
 
